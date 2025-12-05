@@ -23,8 +23,8 @@ with tab1:
     st.header("Тепловая карта")
     # Поменяйте путь !! внимат!
     try:
-        df_train = pd.read_csv("/home/adminadmin/Загрузки/house-prices-advanced-regression-techniques/train.csv")
-        df_test = pd.read_csv("/home/adminadmin/Загрузки/house-prices-advanced-regression-techniques/test.csv")
+        df_train = pd.read_csv("train.csv")
+        df_test = pd.read_csv("test.csv")
     except FileNotFoundError:
         st.error("Файлы train.csv или test.csv не найдены. Укажите правильный путь.")
 
