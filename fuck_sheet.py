@@ -230,10 +230,12 @@ with st.expander("🏠 Предсказание стоимости недвиж�
                     # 2. Обрабатываем данные через пайплайн
                     predictions = model.predict(df)
                     
+                   
+                    
                     # 3. Создаем DataFrame с результатами
                     result_df = pd.DataFrame({
                         'Id': ids if 'Id' in df.columns else range(1, len(predictions) + 1),
-                        'Предсказанная_стоимость': predictions
+                        'Предсказанная_стоимость': np.expm1(predictions)
                     })
                     
                     st.write("Результаты предсказаний:")
@@ -242,11 +244,12 @@ with st.expander("🏠 Предсказание стоимости недвиж�
                     # Создаем статистику
                     col1, col2, col3 = st.columns(3)
                     with col1:
-                        st.metric("Минимальная цена", f"${predictions.min():,.2f}")
+                        st.metric("Минимальная цена", f"${np.expm1(predictions).min():,.2f}")
                     with col2:
-                        st.metric("Средняя цена", f"${predictions.mean():,.2f}")
+                        st.metric("Средняя цена", f"${np.expm1(predictions).mean():,.2f}")
                     with col3:
-                        st.metric("Максимальная цена", f"${predictions.max():,.2f}")
+                        st.metric("Максимальная цена", f"${np.expm1(predictions).max():,.2f}")
+
                     
                     # Скачивание результатов
                     csv_buffer = BytesIO()
